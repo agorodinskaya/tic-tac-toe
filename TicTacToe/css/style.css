@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=BCardo|Caveat|Lobster|Playfair+Display+SC|Rokkitt|Sacramento|Yantramanav|PT+Sans|Permanent+Marker');
+/* font-family: 'Lobster', cursive;
+font-family: 'Sacramento', cursive;
+font-family: 'Caveat', cursive;
+font-family: 'Playfair Display SC', serif;
+font-family: 'Cardo', serif;
+font-family: 'Yantramanav', sans-serif;
+font-family: 'Rokkitt', serif;
+font-family: 'PT Sans', sans-serif;
+font-family: 'Permanent Marker', cursive;
+*/
+
+*{
+  font-family: 'Lobster', cursive;
+  color: #0066ff;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 20px;
+}
+body{
+  background-image: url(totoro.jpg);
+  background-position:center;
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+header{
+  font-size: 24px;
+  position: relative;
+  /* bottom: 450px; */
+}
+td{
+  border: 1px solid black;
+  border-radius: collapse;
+  height: 120px;
+  width: 120px;
+  font-size: 20px;
+  text-align:center;
+  cursor: pointer;
+}
+
+td.even:hover{
+  background-color: pink;
+}
+td.odd:hover{
+  background-color: #ccf2ff;
+}
+table{
+  position:relative;
+  left: 500px;
+  bottom: 450px;
+  table-layout: fixed;
+}
+
+#game{
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: 120px;
+  display:none;
+}
+.pl1{
+  display: block;
+  width:10%;
+  border-radius: 40%;
+  font-size: 36px;
+}
+.pl2{
+  display: block;
+  width:10%;
+  border-radius: 40%;
+
+}
+/*
+#player1{
+  font-size: 20px;
+}
+
+#player2{
+  font-size: 36px;
+} */
+
+#winMessage{
+  display: none;
+}
+
+#info1{
+  display: inline-block;
+
+}
+#info2{
+  display:block;
+
+}
+#selectFig{
+  display: none;
+}
+
+#cat{
+  display: none;
+  transition: left 200ms ease;
+  bottom: 20px;
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+   <title>Tic Tac Toe</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <header>
+      <h2>Welcome to the Totoro game!</h2>
+    </header>
+    <div class="figure">
+        <button type="button" id="startGame" class="btn">Start Game</button>
+        <div id = "selectFig">
+            <div id = "playerOne">
+              <h2>Please choose your figure.</h2>
+              <img class = 'pl1' src="images/totorserceau.gif" alt="Profile picture Player 1">Player 1
+              <div class = "winOne"></div>
+            </div>
+            <div id = "playerTwo">
+              <img class = 'pl2' src="images/totoro1.gif" alt="Profile Picture Player 2">Player 2
+              <div class = "winTwo"></div>
+            </div>
+        </div>
+        <button type="button" id="endGame" class="btn">End Game</button>
+      </div>
+    <!-- <img id = "cat" style="position:absolute;" src="http://www.anniemation.com/clip_art/images/cat-walk.gif"> -->
+
+    <div id="winMessage">
+
+    </div>
+
+    <table id= "game">
+      <tr>
+        <td id = "0" index="0" class = "cell even"></td>
+        <td id = "1" class = "cell odd"></td>
+        <td id = "2" class = "cell even"></td>
+      </tr>
+      <tr>
+        <td id = "3"class = "cell odd" ></td>
+        <td id = "4" class = "cell even"></td>
+        <td id = "5" class = "cell odd"></td>
+      </tr>
+      <tr>
+        <td id = "6" class = "cell even"></td>
+        <td id = "7" class = "cell odd"></td>
+        <td id = "8" class = "cell even"></td>
+      </tr>
+    </table>
+    <!-- <img id = "cat" style="position:absolute;" src="http://www.anniemation.com/clip_art/images/cat-walk.gif"> -->
+
+  <footer>
+    <a id = "info1" href="https://en.wikipedia.org/wiki/My_Neighbor_Totoro">To read more about Totoro, please click here</a>
+    <a id = "info2" href="https://fr.wikipedia.org/wiki/Studio_Ghibli">To read more about studio Ghibli, please click here.</a>
+  </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/testcall.js"></script>
+  </body>
+  </html>
