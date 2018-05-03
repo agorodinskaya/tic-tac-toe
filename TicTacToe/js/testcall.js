@@ -48,10 +48,17 @@ console.log('linked!');
 
 const ticTacToe = {
 
+
   currentTurn: 'X',
+
+
 
   players: ['player1', 'player2'],
   move:1,
+
+  player1Score: 0,
+  player2Score: 0,
+
 
   icons: {
     X: '',
@@ -79,17 +86,6 @@ const ticTacToe = {
 
   gameOver : false,
 
-  // TODO : be able to choose any value:
-
-  setFig: function(a){
-    if(a === icons.X){
-      this.players.player2 = this.icons.O;
-      return this.icons.X;
-    }else if(a === icons.O){
-      this.players.player2 = this.icons.X;
-      return this.icons.O;
-    }
-  },
 
 
 // TODO for more than 9 cells.
@@ -100,14 +96,21 @@ const ticTacToe = {
       const first = win[0];
       const second = win[1];
       const third = win[2];
+      const winArr = [first,second,third];
       console.log(this.board[first]);
       if (this.board[first] === 'X' && this.board[second] === 'X' && this.board[third] === 'X'){
-        console.log('X win');
+        console.log(`Player1 wins!!`);
         this.gameOver = true;
+        this.player1Score++;
+        $('#winOne').text(`Player 1 Score: ${this.player1Score}`)
+        console.log(this.player1Score);
         return 'X';
       } else if (this.board[first] === 'O' && this.board[second] === 'O' && this.board[third] === 'O'){
-        console.log('O win');
+        console.log(`Palyer 2 wins!!`);
         this.gameOver = true;
+        this.player2Score++;
+        $('#winTwo').text(`Player 2 Score: ${this.player2Score}`)
+        console.log(this.player2Score);
         return 'O';
       }
     }
@@ -115,6 +118,8 @@ const ticTacToe = {
     return false;
     // console.log(win);
   }
+
+
 
 };
 
@@ -128,26 +133,45 @@ $('.cell').click(function( ){
   const boardIndex = this.id;
 
   if( ticTacToe.board[boardIndex]!==null || ticTacToe.gameOver ){
+    setTimeout(,1000);
+    $('.cell').html('');
+
     return;
   }
 
   ticTacToe.board[boardIndex] = ticTacToe.currentTurn;
-  $(this).text(  ticTacToe.setFig(a) );
-  console.log(ticTacToe.board);
+  // $('#game').append('<img src="ticTacToe" />')
+  // $(this).attr('src','ticTacToe.player1Icon' );
+  //
+  // if(ticTacToe.currentTurn ==='X'){
+  //   $(this).css('background-image', `url(${ticTacToe.player1Icon})`); //or player2Icon?
+  // } else {
+  //   $(this).css('background-image', `url(${ticTacToe.player2Icon})`)
+  // }
+
+    const url = ticTacToe.icons[ ticTacToe.currentTurn ];
+  $(this).css('background-image', `url(${ url })` );
+
+  // console.log(ticTacToe.player1Icon);
+  // console.log(ticTacToe.board);
   // at the end of the turn, switch players
-  if(ticTacToe.currentTurn === ticTacToe.icons.X){
-    ticTacToe.currentTurn = ticTacToe.icons.O;
-  }else {
-    ticTacToe.currentTurn = ticTacToe.icons.X;
-  }
+    if(ticTacToe.currentTurn ==='X'){
+      ticTacToe.currentTurn = 'O';
+    }else {
+      ticTacToe.currentTurn = 'X';
+    };
+
 
   // check for win
   if(ticTacToe.move >= 5){
     const winner = ticTacToe.winCheck();
       if( winner ){
-        $('#winMessage').html(`${winner} win!`).show();
-
+        // for(let i = 0; i < 3; i++){
+        // $(`#${winArr[i]}`).css("background-color","green");
+        // };
+        $('#winMessage').html(`${winner} wins!!`).show();
         ticTacToe.gameOver = true;
+
       } else if(ticTacToe.move === 9){
         $('#winMessage').html('Game Over').show();
         ticTacToe.gameOver = true;
@@ -158,20 +182,72 @@ $('.cell').click(function( ){
 });
 
 
+
+
 $('#endGame').click(function(){
   // const $cells = $('.cell');
   // for(let i = 0; i< $cells.length; i++){
   //   $cells[i].innerText = '';
   // }
   $('.cell').text('');
-  $('#selectFig').fadeOut();
+  $('#mainGame').fadeOut();
   $('#game').fadeOut();
   $('#winMessage').fadeOut();
+  // reset the game
 });
 
-
+// press start -> open modal -> press close modal -> main Game
 $('#startGame').click(function(){
-  $('#selectFig').show();
+  $('#modal').css ("display", "block");
+  $('.avatar1').show();
+  $('.avatar2').show();
+});
+
+$('.closeModal').click(function(){
+  $('#modal').css ("display", "none");
+  $('#mainGame').show();
   $('#game').show();
   $('#cat').show();
 });
+//
+// $('.avatar').click(function(e){
+//   console.log(this.src);
+//   ticTacToe.player1Icon = $('.avatar1').attr('src');
+//
+// });
+
+
+$('#player1 img').click(function(){
+  ticTacToe.icons.X = this.src;
+  $('#player1 img').css("border","none");
+  $(this).css("border","10px solid white");
+
+});
+
+$('#player2 img').click(function(){
+  ticTacToe.icons.O = this.src;
+  $('#player2 img').css("border","none");
+  $(this).css("border","10px solid white");
+
+});
+
+
+
+// $('.avatar1').click(function(){
+//   $('.avatar1').fadeOut();
+//   // $('.avatar1').attr('src','images/totorserceau.gif');
+//   ticTacToe.player1Icon = $('.avatar1').attr('src');
+//   console.log(ticTacToe.player1Icon);
+//   // store the url to ticTacToe.icons.X
+// });
+//
+// $('.avatar2').click(function(){
+//   $('.avatar2').fadeOut();
+//   ticTacToe.player2Icon = $('.avatar2').attr('src');
+//   console.log(ticTacToe.player1Icon);
+//   // store the url to ticTacToe.icons.X
+// });
+//TODO turns
+// TODO store images
+// TODO count winners.
+// TODO set color to the winning cells.

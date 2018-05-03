@@ -106,8 +106,16 @@ $('.cell').click(function( ){
 
   // check for win
   if(ticTacToe.move >= 5){
-
-    ticTacToe.winCheck();
+    const winner = ticTacToe.winCheck();
+      if( winner ){
+        $('#winMessage').html(`${winner} win!`).show();
+        console.log(winner);
+        ticTacToe.gameOver = true;
+      } else if(ticTacToe.move === 9){
+        $('#winMessage').html('Game Over').show();
+        ticTacToe.gameOver = true;
+        console.log('Game Over - draw');
+      }
   }
 
 
