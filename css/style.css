@@ -18,7 +18,7 @@ font-family: 'Permanent Marker', cursive;
   margin-top: 20px;
 }
 body{
-  background-image: url(totoro.jpg);
+  background-image: url(../images/Totoro.jpg);
   background-position:center;
   background-size:cover;
   background-repeat: no-repeat;
