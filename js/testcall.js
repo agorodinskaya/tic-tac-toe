@@ -1,47 +1,3 @@
-/*
-player1 &2
-figures x and o,
-turns start from 1.
-
-one round:
-- select figures:
-  1. if player 1 has x player 2 has o.
-  2. else if player1 has o player 2 has x
-  3. Make the figures disappear once selected,
-- start the game:
-  player1 plays turn = 1:
-    fill selected figure in board[i] === null,
-  player2 plays turn +1:
-    fill selected figure in board[i] === null,
-  player1 plays (turn +1) +1:
-    fill selected figure in board[i] === null,
-  player2 plays (turn + 2) +1:
-    fill selected figure in board[i] === null,
-  player1 plays (turn + 3) +1:
-    fill selected figuer in board[i] === null,
-    check for win :
-    go through possible winning positions and compare filled cells to the winning position cells.
-    if match => display "win",
-    else if last turn + 1, player2:
-      fill selected figure in board[i] === null,
-      check for win:
-      go through possible winning positions and compare filled cells to the winning position cells.
-      if match => display "win",
-      else if last turn + 1, player1:
-      fill selected figure in board[i] === null,
-      check for win:
-      go through possible winning positions and compare filled cells to the winning position cells.
-      if match => display "win",
-      else if last turn + 1, player2:
-      fill selected figure in board[i] === null,
-      check for win:
-      go through possible winning positions and compare filled cells to the winning position cells.
-      if match => display "win",
-
-  next round : select figures and all the steps as above.
-
-
-*/
 
 console.log('linked!');
 
@@ -50,8 +6,6 @@ const ticTacToe = {
 
 
   currentTurn: 'X',
-
-
 
   // players: ['player1', 'player2'],
   move:1,
@@ -85,8 +39,8 @@ const ticTacToe = {
   ],
 
   gameOver : false,
-
-
+  onclick1: false,
+  onclick2: false,
 
 // TODO for more than 9 cells.
   winCheck: function () {
@@ -106,7 +60,7 @@ const ticTacToe = {
         console.log(this.player1Score);
         return 'Player1';
       } else if (this.board[first] === 'O' && this.board[second] === 'O' && this.board[third] === 'O'){
-        console.log(`Palyer 2 wins!!`);
+        console.log(`Player 2 wins!!`);
         this.gameOver = true;
         this.player2Score++;
         $('#winTwo').text(`Player 2 Score: ${this.player2Score}`)
@@ -126,19 +80,14 @@ const ticTacToe = {
 
 
 // JQuery:
-
+$('#beginGame').hide();
+let url = '';
 
 $('.cell').click(function( ){
 
   const boardIndex = this.id;
 
   if( ticTacToe.board[boardIndex]!==null || ticTacToe.gameOver ){
-    // setTimeout(function() {
-    //  code to run after timeout
-    // } ,500);
-      $('#modal').fadeIn(1000);
-      $('.cell').text('');
-      $('').text()
 
     return;
   }
@@ -148,8 +97,9 @@ $('.cell').click(function( ){
   ticTacToe.board[boardIndex] = ticTacToe.currentTurn;
 
 
-    const url = ticTacToe.icons[ ticTacToe.currentTurn ];
+  url = ticTacToe.icons[ ticTacToe.currentTurn ];
   $(this).css('background-image', `url(${ url })` );
+    console.log(url);
 
     if(ticTacToe.currentTurn ==='X'){
       ticTacToe.currentTurn = 'O';
@@ -162,33 +112,37 @@ $('.cell').click(function( ){
   if(ticTacToe.move >= 5){
     const winner = ticTacToe.winCheck();
       if( winner ){
-        $('#winMessage').addClass('animated rubberBand');
-        $('#winMessage').html(`${winner} wins!!`).show().animateCss('rubberBand');
-        // $('#winMessage').html(`${winner} wins!!`).show();
-
-        // $('#winMessage').animateCss('bounce');
-        ticTacToe.gameOver = true;
-
+        gameOverModal( `${winner} wins!!` );
       } else if(ticTacToe.move === 9){
-        $('#winMessage').addClass('animated rubberBand');
-        $('#winMessage').html('Game Over').show().animateCss('rubberBand');
-        ticTacToe.gameOver = true;
-        console.log('Game Over - draw');
+        gameOverModal( 'Game Over' );
       }
   }
   ticTacToe.move++;
 });
 
+const gameOverModal = function ( message ) {
+  $('#winMessage').addClass('animated rubberBand');
+  $('#winMessage').html( message ).show();
+  $('.cell').fadeOut(1000);
 
+  window.setTimeout(function () {
+    $('#modal').fadeIn(1000);
+  }, 2000);
 
+  $('#beginGame').hide();
+  ticTacToe.onclick1 = false;
+  ticTacToe.onclick2 = false;
 
-$('#endGame').click(function(){
-  $('.cell').text('');
-  $('#mainGame').fadeOut();
-  $('#game').fadeOut();
-  $('#winMessage').fadeOut();
-  // reset the game
-});
+  ticTacToe.gameOver = true;
+};
+
+// $('#endGame').click(function(){
+//   $('.cell').text('');
+//   $('#mainGame').fadeOut();
+//   $('#game').fadeOut();
+//   $('#winMessage').fadeOut();
+//   // reset the game
+// });
 
 // press start -> open modal -> press close modal -> main Game
 $('#startGame').click(function(){
@@ -202,32 +156,52 @@ $('.closeModal').click(function(){
   $('#modal').css ("display", "none");
   $('#mainGame').show();
   $('#game').show();
+  $('#startGame').hide();
 
 });
 
+
+
+$('#beginGame').click(function(){
+  $('#modal').hide();
+  $('#mainGame').show();
+  $('#game').show();
+  $('#winMessage').fadeOut();
+  $('#startGame').hide();
+  $('.cell').css('background-image', 'none').show();
+  ticTacToe.gameOver = false;
+  ticTacToe.move = 1;
+  ticTacToe.board = [
+    null, null, null,
+    null, null, null,
+    null, null, null
+  ];
+})
+
+
 $('#player1 img').click(function(){
   ticTacToe.icons.X = this.src;
+  console.log(ticTacToe.icons.X);
+
   $('#player1 img').css("border","none");
   $(this).css("border","10px solid white");
-  $('#mainGame .pl1 img').css('background-image',`url(${ url })`);
-
-
+  console.log(this.src);
+  $('.pl1').css('background-image',`url(${ this.src })`);
+  ticTacToe.onclick1 = true;
+  checkonclick();
 });
 
 $('#player2 img').click(function(){
   ticTacToe.icons.O = this.src;
   $('#player2 img').css("border","none");
-  $(this).css("border","10px solid white");
-  $('#mainGame > pl2 img').css('background-image',`url(${ url })`);
-
+  $(this).css("border","10px solid white")
+  $('.pl2').css('background-image',`url(${ this.src })`);
+  ticTacToe.onclick2 = true;
+  checkonclick();
 });
 
-
-
-
-// TODO store images on the game page.
-// TODO count wins.
-
-//============
-// TODO rework the buttons start / set figures.
-// TODO make the modal appear automatically on the screen before the game starts and a few secs after the game is finished.
+checkonclick = function(){
+  if(ticTacToe.onclick1 && ticTacToe.onclick2 ){
+    $('#beginGame').show();
+  }
+}
