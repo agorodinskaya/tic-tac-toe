@@ -18,7 +18,7 @@ The game is for 2 experienced in Tic Tac Toe players using the same PC
 
 When one of the players wins the game;
 _Wishlist_ : 
-- wish to do add more features to my game: e.g. additional cells; AI;more personalisation options: e.g. add avatars, give Players 1&2 names, personalise cell colors etc.
+- wish to do add more features to my game: e.g. additional cells, AI, more personalisation options: e.g. add avatars, give Players 1&2 names, personalise cell colors etc.
 
 _Known bugs_:
 - nothing known so far.
