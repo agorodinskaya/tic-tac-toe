@@ -1,5 +1,5 @@
 
-# Heading :
+# TicTacToe :
 Please follow the link to access the game:
 [TicTacToe]
 https://agorodinskaya.github.io/tic-tac-toe/TicTacToeShow.html
