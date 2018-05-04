@@ -47,7 +47,7 @@ td.odd:hover{
 }
 table{
   position:relative;
-  left: 400px;
+  left: 600px;
   bottom: 320px;
   table-layout: fixed;
 }
@@ -147,22 +147,6 @@ position: fixed; /* Stay in place */
   line-height: 100%;
 }
 
-.avatar1:hover,
-.avatar1:focus {
-    cursor: pointer;
-}
-.avatar1{
-  /* display: block; */
-  width:10%;
-  border-radius: 40%;
-  font-size: 36px;
-}
-.avatar2{
-  /* display: block; */
-  width:10%;
-  border-radius: 40%;
-}
-.avatar2:hover,
-.avatar2:focus {
-    cursor: pointer;
+#winMessage{
+  font-size: 30px;
 }

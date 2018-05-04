@@ -53,7 +53,7 @@ const ticTacToe = {
 
 
 
-  players: ['player1', 'player2'],
+  // players: ['player1', 'player2'],
   move:1,
 
   player1Score: 0,
@@ -96,7 +96,7 @@ const ticTacToe = {
       const first = win[0];
       const second = win[1];
       const third = win[2];
-      const winArr = [first,second,third];
+      // const winArr = [first,second,third];
       console.log(this.board[first]);
       if (this.board[first] === 'X' && this.board[second] === 'X' && this.board[third] === 'X'){
         console.log(`Player1 wins!!`);
@@ -104,14 +104,14 @@ const ticTacToe = {
         this.player1Score++;
         $('#winOne').text(`Player 1 Score: ${this.player1Score}`)
         console.log(this.player1Score);
-        return 'X';
+        return 'Player1';
       } else if (this.board[first] === 'O' && this.board[second] === 'O' && this.board[third] === 'O'){
         console.log(`Palyer 2 wins!!`);
         this.gameOver = true;
         this.player2Score++;
         $('#winTwo').text(`Player 2 Score: ${this.player2Score}`)
         console.log(this.player2Score);
-        return 'O';
+        return 'Player2';
       }
     }
 
@@ -133,28 +133,24 @@ $('.cell').click(function( ){
   const boardIndex = this.id;
 
   if( ticTacToe.board[boardIndex]!==null || ticTacToe.gameOver ){
-    setTimeout(,1000);
-    $('.cell').html('');
+    // setTimeout(function() {
+    //  code to run after timeout
+    // } ,500);
+      $('#modal').fadeIn(1000);
+      $('.cell').text('');
+      $('').text()
 
     return;
   }
 
+
+
   ticTacToe.board[boardIndex] = ticTacToe.currentTurn;
-  // $('#game').append('<img src="ticTacToe" />')
-  // $(this).attr('src','ticTacToe.player1Icon' );
-  //
-  // if(ticTacToe.currentTurn ==='X'){
-  //   $(this).css('background-image', `url(${ticTacToe.player1Icon})`); //or player2Icon?
-  // } else {
-  //   $(this).css('background-image', `url(${ticTacToe.player2Icon})`)
-  // }
+
 
     const url = ticTacToe.icons[ ticTacToe.currentTurn ];
   $(this).css('background-image', `url(${ url })` );
 
-  // console.log(ticTacToe.player1Icon);
-  // console.log(ticTacToe.board);
-  // at the end of the turn, switch players
     if(ticTacToe.currentTurn ==='X'){
       ticTacToe.currentTurn = 'O';
     }else {
@@ -166,14 +162,16 @@ $('.cell').click(function( ){
   if(ticTacToe.move >= 5){
     const winner = ticTacToe.winCheck();
       if( winner ){
-        // for(let i = 0; i < 3; i++){
-        // $(`#${winArr[i]}`).css("background-color","green");
-        // };
-        $('#winMessage').html(`${winner} wins!!`).show();
+        $('#winMessage').addClass('animated rubberBand');
+        $('#winMessage').html(`${winner} wins!!`).show().animateCss('rubberBand');
+        // $('#winMessage').html(`${winner} wins!!`).show();
+
+        // $('#winMessage').animateCss('bounce');
         ticTacToe.gameOver = true;
 
       } else if(ticTacToe.move === 9){
-        $('#winMessage').html('Game Over').show();
+        $('#winMessage').addClass('animated rubberBand');
+        $('#winMessage').html('Game Over').show().animateCss('rubberBand');
         ticTacToe.gameOver = true;
         console.log('Game Over - draw');
       }
@@ -185,10 +183,6 @@ $('.cell').click(function( ){
 
 
 $('#endGame').click(function(){
-  // const $cells = $('.cell');
-  // for(let i = 0; i< $cells.length; i++){
-  //   $cells[i].innerText = '';
-  // }
   $('.cell').text('');
   $('#mainGame').fadeOut();
   $('#game').fadeOut();
@@ -202,25 +196,21 @@ $('#startGame').click(function(){
   $('.avatar1').show();
   $('.avatar2').show();
 });
+// $('# mainGame pl1 img').css('background-image', `url(${ url })`);
 
 $('.closeModal').click(function(){
   $('#modal').css ("display", "none");
   $('#mainGame').show();
   $('#game').show();
-  $('#cat').show();
-});
-//
-// $('.avatar').click(function(e){
-//   console.log(this.src);
-//   ticTacToe.player1Icon = $('.avatar1').attr('src');
-//
-// });
 
+});
 
 $('#player1 img').click(function(){
   ticTacToe.icons.X = this.src;
   $('#player1 img').css("border","none");
   $(this).css("border","10px solid white");
+  $('#mainGame .pl1 img').css('background-image',`url(${ url })`);
+
 
 });
 
@@ -228,26 +218,16 @@ $('#player2 img').click(function(){
   ticTacToe.icons.O = this.src;
   $('#player2 img').css("border","none");
   $(this).css("border","10px solid white");
+  $('#mainGame > pl2 img').css('background-image',`url(${ url })`);
 
 });
 
 
 
-// $('.avatar1').click(function(){
-//   $('.avatar1').fadeOut();
-//   // $('.avatar1').attr('src','images/totorserceau.gif');
-//   ticTacToe.player1Icon = $('.avatar1').attr('src');
-//   console.log(ticTacToe.player1Icon);
-//   // store the url to ticTacToe.icons.X
-// });
-//
-// $('.avatar2').click(function(){
-//   $('.avatar2').fadeOut();
-//   ticTacToe.player2Icon = $('.avatar2').attr('src');
-//   console.log(ticTacToe.player1Icon);
-//   // store the url to ticTacToe.icons.X
-// });
-//TODO turns
-// TODO store images
-// TODO count winners.
-// TODO set color to the winning cells.
+
+// TODO store images on the game page.
+// TODO count wins.
+
+//============
+// TODO rework the buttons start / set figures.
+// TODO make the modal appear automatically on the screen before the game starts and a few secs after the game is finished.
