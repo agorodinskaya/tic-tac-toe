@@ -27,8 +27,4 @@ _Libraries used_ :
 - Jquery 
 - Animate.css 
 
-# Acknowledgments:
-- Luke Hammer,
-- Grant Hanrahan,
-- Nathan Del Medico
 
